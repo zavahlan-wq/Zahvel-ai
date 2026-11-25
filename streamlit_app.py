@@ -34,9 +34,21 @@ if st.button("Generate Engineering Solution", type="primary"):
                 f"Task: {task_type}.\n\n"
                 f"Provide a clear, practical, technical solution for:\n{user_input}"
             )
-            response = client.models.generate_content(
-                model="gemini-3.8-flash",
-                contents=prompt,
-            )
-            st.markdown("### Engineering Solution")
-            st.write(response.text)
+            response = None
+            last_error = ""
+            for model_name in ["gemini-flash-latest", "gemini-2.5-flash-lite", "gemini-3.8-flash"]:
+                try:
+                    response = client.models.generate_content(
+                        model=model_name,
+                        contents=prompt,
+                    )
+                    break
+                except Exception as e:
+                    last_error = str(e)
+                    continue
+
+            if response:
+                st.markdown("### Engineering Solution")
+                st.write(response.text)
+            else:
+                st.info("Our AI servers are currently experiencing heavy traffic. Please wait 10 seconds and click Generate again.")
