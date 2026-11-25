@@ -51,4 +51,4 @@ if st.button("Generate Engineering Solution", type="primary"):
                 st.markdown("### Engineering Solution")
                 st.write(response.text)
             else:
-                st.info("Our AI servers are currently experiencing heavy traffic. Please wait 10 seconds and click Generate again.")
+                st.warning(f"API Notice: {last_error}")
