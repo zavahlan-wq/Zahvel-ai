@@ -35,7 +35,7 @@ if st.button("Generate Engineering Solution", type="primary"):
                 f"Provide a clear, practical, technical solution for:\n{user_input}"
             )
             response = client.models.generate_content(
-                model="gemini-2.5-flash",
+                model="gemini-3.8-flash",
                 contents=prompt,
             )
             st.markdown("### Engineering Solution")
